@@ -155,6 +155,8 @@ state_cb(const struct xbps_state_cb_data *xscd, void *cbdata UNUSED)
 		printf("%s\n", xscd->desc);
 		printf("Fingerprint: %s\n", xscd->arg);
 		rv = yesno("Do you want to import this public key?");
+        if (rv == 0)
+			printf("Aborting!\n");
 		break;
 	case XBPS_STATE_UNPACK_FILE_PRESERVED:
 		printf("%s\n", xscd->desc);

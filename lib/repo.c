@@ -834,7 +834,9 @@ xbps_repo_key_import(struct xbps_repo *repo)
 	import = xbps_set_cb_state(repo->xhp, XBPS_STATE_REPO_KEY_IMPORT, 0,
 			hexfp, "`%s' repository has been RSA signed by \"%s\"",
 			repo->uri, signedby);
-	if (import <= 0) {
+	if (import == 0) {
+		goto out;
+	} else if (import < 0) {
 		rv = EAGAIN;
 		goto out;
 	}
